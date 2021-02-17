@@ -1,16 +1,17 @@
+#!/usr/bin/env python2
 from rflib import *
 import signal
 import sys
 
 run = True
-freq = 433000000
-modulation = 4800
+freq = 700000000
+baudrate = 2000
 
 d = RfCat()
 d.setMdmModulation(MOD_ASK_OOK)
 d.setMdmSyncMode(0)
 d.setFreq(freq)
-d.setMdmDRate(modulation)
+d.setMdmDRate(baudrate)
 d.setMaxPower();
 d.lowball();
 
@@ -22,8 +23,8 @@ def signal_handler(sig, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 print "Starting RFrecv() ..."
-print "Frequency:", "{:,}".format(freq) + "Hz"
-print "Modulation:", "{:,}".format(modulation) + "Bd"
+print "Frequency:{:,}Hz".format(freq)
+print "Baud rate: {:,}Bd".format(baudrate)
 
 while(run):
 	try:
